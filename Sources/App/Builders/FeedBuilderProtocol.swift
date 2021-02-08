@@ -27,9 +27,10 @@ extension FeedBuilder {
             let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
             
         let dateString = (currentTime - storyTime).timeInterval.toString { formatter in
-            formatter.unitsStyle = .full
+            formatter.unitsStyle = .abbreviated
             formatter.collapsesLargestUnit = false
             formatter.allowsFractionalUnits = true
+            formatter.allowedUnits = [.hour, .minute]
         }
             
             return dateString
