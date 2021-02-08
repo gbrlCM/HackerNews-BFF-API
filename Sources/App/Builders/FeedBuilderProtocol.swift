@@ -26,11 +26,13 @@ extension FeedBuilder {
             let currentTime = Date()
             let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
             
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.day ,.hour, .minute]
-            formatter.unitsStyle = .abbreviated
+        let dateString = (currentTime - storyTime).timeInterval.toString { formatter in
+            formatter.unitsStyle = .full
+            formatter.collapsesLargestUnit = false
+            formatter.allowsFractionalUnits = true
+        }
             
-            return formatter.string(from: currentTime.timeIntervalSince(storyTime))
+            return dateString
             
         }
 }
