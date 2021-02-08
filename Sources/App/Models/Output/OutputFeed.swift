@@ -6,3 +6,11 @@
 //
 
 import Foundation
+import Vapor
+
+struct OutputFeed: Content {
+    var ids: [Int]
+    var page: Int
+    var quantity: Int
+    var data: [OutputStory]
+}

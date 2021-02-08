@@ -8,7 +8,7 @@
 import Foundation
 import Vapor
 
-struct Story: Content {
+struct OutputStory: Content {
     var storyIdentifier: Int
     var title: String
     var subtitle: String

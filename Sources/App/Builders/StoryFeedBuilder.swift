@@ -12,12 +12,18 @@ struct StoryFeedBuilder: FeedBuilder {
     typealias ModelType = InputStory
     
     var model = InputStory.self
+    var apiErrorData: InputStory = .errorStory
     
     func build(ids: [Int], stories: [ModelType], page: Int) -> OutputFeed {
-        let formatedStory = stories.map { story in
+        let formatedStory = stories.filter{story in
+            story != apiErrorData
+        }.map { story in
             buildOutput(forStory: story)
         }
-        return OutputFeed(ids: ids, page: page, quantity: formatedStory.count, data: formatedStory)
+        
+        let filteredIds = ids.filter {id in id != apiErrorData.id}
+        
+        return OutputFeed(ids: filteredIds, page: page, quantity: formatedStory.count, data: formatedStory)
     }
     
     private func buildOutput(forStory story: InputStory) -> OutputStory {
@@ -36,18 +42,4 @@ struct StoryFeedBuilder: FeedBuilder {
         let subtitle = "\(score) points, by \(author), \(elapsedTime) ago"
         return subtitle
     }
-    
-    private func transformToElapsedTime(with unixTimeStamp: Int?) -> String? {
-            guard let timeStamp = unixTimeStamp else {return nil}
-            
-            let currentTime = Date()
-            let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
-            
-            let formatter = DateComponentsFormatter()
-            formatter.allowedUnits = [.day ,.hour, .minute]
-            formatter.unitsStyle = .abbreviated
-            
-            return formatter.string(from: currentTime.timeIntervalSince(storyTime))
-            
-        }
 }
