@@ -27,7 +27,10 @@ extension FeedBuilder {
         let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
         let dateComponents = currentTime - storyTime
         
-        let date = Date(components: dateComponents, region: .none)?.toFormat("HH mm")
+        let date = dateComponents.timeInterval.toString { formatter in
+            formatter.allowedUnits = [.hour, .minute]
+            formatter.unitsStyle = .abbreviated
+        }
         
         
         return date
