@@ -25,15 +25,11 @@ extension FeedBuilder {
         
         let currentTime = Date()
         let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
-        let dateComponents = currentTime - storyTime
+        let timeInterval = currentTime.timeIntervalSince(storyTime)
         
-        let date = dateComponents.timeInterval.toString { formatter in
-            formatter.allowedUnits = [.hour, .minute]
-            formatter.unitsStyle = .abbreviated
-        }
+        let timeElapsed = TimeElapsed(since: timeInterval)
         
-        
-        return date
+        return timeElapsed.stringfy()
         
     }
 }
