@@ -21,19 +21,16 @@ protocol FeedBuilder {
 extension FeedBuilder {
     
     func transformToElapsedTime(with unixTimeStamp: Int?) -> String? {
-            guard let timeStamp = unixTimeStamp else {return nil}
-            
-            let currentTime = Date()
-            let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
-            
-        let dateString = (currentTime - storyTime).timeInterval.toString { formatter in
-            formatter.unitsStyle = .abbreviated
-            formatter.collapsesLargestUnit = false
-            formatter.allowsFractionalUnits = true
-            formatter.allowedUnits = [.hour, .minute]
-        }
-            
-            return dateString
-            
-        }
+        guard let timeStamp = unixTimeStamp else {return nil}
+        
+        let currentTime = Date()
+        let storyTime = Date(timeIntervalSince1970: TimeInterval(timeStamp))
+        let dateComponents = currentTime - storyTime
+        
+        let date = Date(components: dateComponents, region: .none)?.toFormat("HH mm")
+        
+        
+        return date
+        
+    }
 }
