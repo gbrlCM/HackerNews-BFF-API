@@ -71,23 +71,23 @@ struct TimeElapsed {
         var string = ""
         
         if let year = self.year {
-            string.append("\(year)y ")
+            string.append("\(year)y")
         }
         
         if let month = self.month {
-            string.append("\(month)m ")
+            string.append(" \(month)m")
         }
         
         if let day = self.day {
-            string.append("\(day)d ")
+            string.append(" \(day)d")
         }
         
         if let hour = self.hour {
-            string.append("\(hour)h ")
+            string.append(" \(hour)h")
         }
         
         if let minute = self.minute {
-            string.append("\(minute)min ")
+            string.append(" \(minute)min")
         }
         
         return string

@@ -128,15 +128,6 @@
         }
       },
       {
-        "package": "SwiftDate",
-        "repositoryURL": "https://github.com/Maxim-Inv/SwiftDate.git",
-        "state": {
-          "branch": "master",
-          "revision": "6c132ba3578e196296842509407de072a976d5c6",
-          "version": null
-        }
-      },
-      {
         "package": "vapor",
         "repositoryURL": "https://github.com/vapor/vapor.git",
         "state": {
